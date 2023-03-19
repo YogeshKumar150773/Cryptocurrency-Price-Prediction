@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>TITLE</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<style>
+.back{
+ background-image: url("{{ url_for('static', filename='image/cry.gif') }}");
+}
+.white{
+color:white;
+}
+.space{
+margin:10px 30px;
+padding:15px 10px;
+background: palegreen;
+width:500px
+}
+.gap{
+padding:10px 20px;
+}
+</style>
+  
+</head>
+
+<body class="back">
+ <div>
+	<div class="jumbotron">
+	<h1 style="text-align:center">CRYPTOCURRENCY MARKET PRICE PREDICTIONS </h1>
+	
+	</div>
+     <!-- Main Input For Receiving Query to our ML -->
+    <form class="form-group" action="{{ url_for('predict')}}"method="post">
+    		
+		<div class="row">
+		<div class="gap col-md-6 ">
+		<label class="white" for="">SLUG</label>
+		<select class="nspace form-control" name="SLUG" id="SLUG">
+  <option value=0>binance-coin</option>
+  <option value=1>bitcoin</option>
+  <option value=2>cardano</option>
+  <option value=3>ethereum</option>
+ </select>
+
+		<label class="white"  for="">OPEN</label>
+		<input type="number" class="space form-control" step="0.01" name="OPEN" placeholder="OPEN" required="required" /><br>
+
+		<label class="white"  for="">HIGH</label>
+		<input type="number" class="space form-control" step="0.01" name="HIGH" placeholder="HIGH" required="required" /><br>
+
+		
+		</div>
+
+
+
+<div class="gap col-md-6">
+		<label class="white"  for="">LOW</label>		
+		<input type="number" class="space form-control" step="0.01" name="LOW" placeholder="LOW" required="required" /><br>
+
+		<label class="white"  for="">CLOSE</label>
+		<input type="number" class="space form-control" step="0.01" name="CLOSE" placeholder="CLOSE" required="required" /><br>
+
+		<label class="white"  for="">VOLUME</label>
+		<input type="number" class="space form-control" step="0.01" name="VOLUME" placeholder="VOLUME" required="required" /><br>
+
+</div>
+</div>
+
+<div style="padding:2% 35%">
+  <button type="submit" class="btn btn-success btn-block" style="width:350px;padding:20px">Predict</button>		
+</div>
+      
+    </form>
+
+   <br>
+   <br>
+<div  style="background:skyblue;padding:2% 40%">
+   {{ prediction_text }}
+</div>
+ </div>
+
+
+</body>
+</html>
